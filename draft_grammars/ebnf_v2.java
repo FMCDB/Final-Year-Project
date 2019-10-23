@@ -26,7 +26,7 @@ ordinary -> ((ordinaryPosition ((number ordinaryNames ['s'] tincture) | animal |
 
 diminutiveNames -> 'pallet' | 'endorse' | 'bar' | 'barrulet' | 'hamade' | 'ribbon' | 'baton' | 'bendlet sinister' .
 
-charges -> (['between'] number subordinary 's' direction ordinaryPosition tincture) | '' .    
+charges -> ['between'] number subordinary 's' direction ordinaryPosition tincture .    
 
 subordinary -> 'lozenge' | 'billet' | 'annulet' | 'roundel' | 'label' | 'fret' | 'baton' | 'horses\' heads' | 'torteaux' | 'roses' | 'spear' | 'shell' | 'quarter' | 'canton' | 'flaunch' | 'gore' | 'gyron' | 'orle' | 'escutcheon' | 'fusil' | 'mascle' | 'rustre' .
 
