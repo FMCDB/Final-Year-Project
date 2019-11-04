@@ -13,78 +13,112 @@ import processing.core.PImage;
 
 public class UsingProcessing extends PApplet{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	static String blazon;
-	PImage img;
+	PImage shield, ordinary;
 
 	public static void main(String[] args) {
 		
-		String testBlazon = "Purpure";
+		String testBlazon = "Vert";
         testLexer lexer = new testLexer(CharStreams.fromString(testBlazon));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        CommonTokenStream tokens = new CommonTokenStream(lexer); //provides access to all tokens by index
         testParser parser = new testParser(tokens);
         ParseTree tree = parser.blazon();
+        	
         ParseTreeWalker walker = new ParseTreeWalker();
         
-        blazonListener listener = new blazonListener();
+        //Listens for the triggering of specific parsing rules
+        blazonListener listener = new blazonListener(testBlazon);
         
         walker.walk(listener, tree);
         
         blazon = listener.getBlazon();
         
+        System.out.println(blazon);
+        
 		PApplet.main("main.java.UsingProcessing");	
 	}
 	
-    public void setup() {
-    	
-		  size(500,500);
-		  img = loadImage("shield.PNG");
-		  int dimension = img.width * img.height;
-		  img.loadPixels();
-		  String Color = blazon;
-		  int shieldColor = color(255, 255, 255);
-		  
-		  if (Color.equals("Azure")){
-		    shieldColor = color(0, 0, 255);
+	
+	public PImage constructImage(String imageName, String color, int colorValue) {
+		
+		PImage image = loadImage(imageName);
+		int dimension = image.width * image.height;
+		image.loadPixels();
+		
+		if (color.equals("Azure")){
+			colorValue = color(0, 0, 255);
 		  }
-		  else if (Color.equals("Gules")){
-		    shieldColor = color(255, 0, 0);
+		  else if (color.equals("Gules")){
+			  colorValue = color(255, 0, 0);
 		  }
-		  else if (Color.equals("Sable")){
-		    shieldColor = color(0, 0, 0);
+		  else if (color.equals("Sable")){
+			  colorValue = color(0, 0, 0);
 		  }
-		  else if (Color.equals("Vert")){
-		    shieldColor = color(0, 255, 0);
+		  else if (color.equals("Vert")){
+			  colorValue = color(0, 255, 0);
 		  }
-		  else if (Color.equals("Purpure")){
-		    shieldColor = color(128, 0, 128);
+		  else if (color.equals("Purpure")){
+			  colorValue = color(128, 0, 128);
 		  }
-		  else if (Color.equals("Or")){
-		    shieldColor = color(255, 255, 0);
+		  else if (color.equals("Or")){
+			  colorValue = color(255, 255, 0);
 		  }
-		  else if (Color.equals("Argent")){
-		    shieldColor = color(255, 255, 255);
+		  else if (color.equals("Argent")){
+			  colorValue = color(255, 255, 255);
 		  }
 		  else{
 		    print("Not a valid tincture.");
 		  }
 		  
-		  //Apply color to shield
+		  //Apply color to ordinary
+		  //All non-transparent pixels in the image have negative values - CHECK
 		  for (int i = 0; i < dimension; i++) { 
-		    if(img.pixels[i] != 0){
-		      img.pixels[i] = shieldColor; //white by default
+		    if(image.pixels[i] < 0){
+		    	image.pixels[i] = colorValue; 	
 		    } 
-		  } 
+		  }
 		  
-		  img.updatePixels();
+		  image.updatePixels();
+		  
+		  return image;
+	}
+	
+	
+    public void setup() {
+    	
+		  size(500,500);
+		  int colorValue = color(255, 255, 255); //white by default
+		  String shieldColor, ordinaryName = "", ordinaryColor = "";
+		  
+		  String blazonArray[] = blazon.split(" ");
+		  
+		  if(blazonArray.length > 1) {
+			  shieldColor = blazonArray[0].substring(0, blazonArray[0].length() - 1); //exclude comma
+			  ordinaryName = blazonArray[2];
+			  ordinaryColor = blazonArray[3];
+		  }
+		  else {
+			  shieldColor = blazonArray[0];
+		  }
+		  
+		  imageMode(CENTER);
+		  
+		  shield = constructImage("shield.PNG", shieldColor, colorValue);
+		  image(shield, 250, 250);
+		  
+		  if(!ordinaryName.equals("")) {
+			  ordinary = constructImage(ordinaryName+"_single.png", ordinaryColor, colorValue);
+			  if(ordinaryName.equals("pale")) {
+				  image(ordinary, 250, 327);
+			  }
+			  else if(ordinaryName.equals("bend")) {
+				  image(ordinary, 235, 230);
+			  }
+			  else {
+				  image(ordinary, 250, 250);  
+			  }
+		  }	
     }
-
-    public void draw() {
-    	imageMode(CENTER);
-    	image(img, 250, 250);
-    }
-
 }
