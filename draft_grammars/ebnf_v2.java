@@ -49,19 +49,83 @@ cadencyNames -> 'lozenge' | ('label of' number 'points')  | 'crescent' | 'mullet
 
 TESTS:
 
-party per pale argent and gules 												(division)
-Argent, on a chevron between three roses gules, as many crescents of the field 	(tincture fieldPosition charges charges)
-Azure, semé-de-lis and a lion rampant or, over all a bend gules 				(tincture semé animal 'over all' ordinary)
-Gules, a bend or, in chief a crescent argent 									(tincture ordinary ordinary)
-Sable, three tilting-spears palewise in fess 									(tincture charges)
-per cross vert and murrey 														(divison)
-Azure, semé of frets Tenné 														(tincture semé)
-Gules, a bend argent, debruised by three spears fesswise in chief				(tincture ordinaryNames tincture 'debruised by' charges ordinaryPosition)
-Azure, a bend between two horses' heads or										(tincture ordinary charges)					
-Or, three torteaux																(tincture charges)	
-Gules, two leopards passant in pale sable										(tincture animal ordinaryPosition)	
-Azure, gouttée or																(tincture seméNames tincture)	
+-party per pale argent and gules 												(division)
+Argent, on a chevron between three roses gules, as many lozenges of the field 	(tincture fieldPosition charges charges)
+-Azure, semé-de-lis and a lion rampant or, over all a bend gules 				(tincture semé animal 'over all' ordinary)
+Gules, a bend or, in chief a lozenge argent 									(tincture ordinary ordinary)
+Sable, three spears palewise in fess 									(tincture charges)
+-per cross Vert and Murrey 														(divison)
+-Azure, semé of frets Tenné 														(tincture semé)
+Gules, a bend Argent, debruised by three spears fesswise in chief				(tincture ordinaryNames tincture 'debruised by' charges ordinaryPosition)
+Azure, a bend between two roundels or										(tincture ordinary charges)					
+-Gules, two leopards passant in pale sable										(tincture animal ordinaryPosition)	
+-Azure, gouttée or	(3)															(tincture seméNames tincture)	
 Argent, a chevron between three shells Sable, a cross moline for distinction	(tincture ordinaryNames charges cadency)
 Vert, a fess azure, a label of seven points gules for difference				(tincture ordinary cadency)
+
+0: tincture
+1: [on] (a|qty) ordName [tincture] 
+2: seme
+3: (in positiom | debruised by | between) qty charges (palewise | fesswise) [in position] [tincture]
+4: charges (2nd occurance)
+5: qty charge tincture for (distinction | difference)
+	
+	
+	
+	
+
+
+tincture, on a ordinary, tincture, between three charges, some charges
+tincture, seme and a charge, tincture, over all the ordinary
+tincture, ordinary, tincture, in position some charges, tincture
+tincture, some charges, direction, position
+tincture, semeName, tincture
+tincture, seme of charges, tincture
+tincture, ordinary, debruised by some charges, direction, position
+tincture, ordianry, between some charges, tincture
+tincture, some charges
+tincture, ordinary, position, tincture
+tincture, seme tincture
+tincture, ordinary, between some charges, cadency
+tincture, ordinary, cadency
+
+
+
+
+tincture, on a ordinary, tincture, between three charges, some charges
+tincture, ordinary, tincture, in position some charges, tincture
+tincture, ordinary, debruised by some charges, direction, position
+tincture, ordinary, between some charges, tincture
+tincture, ordinary, between some charges, tincture, cadency
+tincture, ordinary, position, tincture
+tincture, ordinary, cadency
+
+
+---create arrays for tinctures, ordinarys, semeNames, charges, directions, positions
+
+
+	
+	TODO
+	------------------------------------------------------------------------------------------------
+
+
+	tincture, charge, tincture over all the ordinary
+
+	tincture, some charges
+	-Or, three torteaux							(3)									
+
+	tincture, seme and a charge, tincture, over all the ordinary
+	tincture, semeName, tincture
+	tincture, seme of charges, tincture
+	tincture, seme tincture
+
+	animals
+
+	cross moline in cadency
+
+	label of n points in cadency
+
+	-------------------------------------------------------------------------------------------------
+
 
 
