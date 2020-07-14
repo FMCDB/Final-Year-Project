@@ -5,6 +5,8 @@ testParser$SemeContext.class
 testParser$NumberContext.class
 testParser$TinctureNamesContext.class
 testLexer.class
+testParser$QuarteringContext.class
+testParser$BordureContext.class
 testVisitor.class
 testParser$DiminutiveNamesContext.class
 testParser$DirectionContext.class
@@ -18,10 +20,10 @@ testParser$OrdinaryNamesContext.class
 testParser$TinctureContext.class
 testParser$BlazonContext.class
 testParser$AnimalContext.class
-testParser$FieldPositionContext.class
 testParser$AnimalPositionContext.class
 testBaseListener.class
 testParser$ChargesContext.class
 testParser$OrdinaryPositionContext.class
+testParser$QuarterNameContext.class
 testParser$CadencyNamesContext.class
 testParser$ComplexFieldContext.class

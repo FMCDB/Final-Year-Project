@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sending form data to Java Servlet</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+         $(document).ready(function() {
+            $('form').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url : $(this).attr('action'),
+                    type : $(this).attr('method'),
+                    data : new FormData(this),
+                    contentType : false,
+                    cache : false,
+                    processData : false,
+                    success : function(response) {
+           		      var timestamp = new Date().getTime();
+           		   	  setTimeout(function () {
+           		   		var userInput = $('#user-input').val();
+	           		   	if(response){
+	       		   			var errorLocation = parseInt(response[0]);
+	       		   			var offendingString = response[1];
+	       		   			var length = offendingString.length;
+	       		   			$('#errorMsg').html("<b>This is not a valid blazon:</b>	 ");
+	       		   			$('#errorMsg').append(userInput.substring(0,errorLocation) + '<span>' + userInput.substring(errorLocation,errorLocation+length) + '</span>' + userInput.substring(errorLocation + length));
+	       		   			$("span").css("text-decoration", "underline red");
+	       		   		}
+	       		   		else{
+	       		   			$('#errorMsg').html("");
+	       		   			$('#blazon-text').html("");
+	       		   			$('#image_frame').html('<img src="images/blazon-image.png?timestamp='+ timestamp +'"></img>');	
+		       		   		fetch('images/blazon.txt')
+		                    .then(response => response.text())
+		                    .then((data) => {
+		                    	$('#blazon-text').html('<h3>'+data+'</h3>');
+		                    })
+	       		   		}
+           	    	  }, 4000);
+                    },
+                }); 
+                return false;
+            });
+        }); 
+        </script>
+    </head>
+    <body style="text-align: center;">
+        <div class="main-div">
+
+			<div class="container">
+			
+			  <h1>Heraldic Generator</h1>
+			  
+			  <br/>
+			  <br/>
+			  
+			  <p>This website allows you to enter a <b>blazon</b> and see the corresponding <b>coat of arms</b>. A blazon is a piece of text written in a
+			  formalized language based on medieval French and English which fully describes a coat of arms. An example might be a gold <b>cross</b> on a blue background. The blazon for
+			  this coat of arms would be "<i>Azure, a cross Or</i>". Here the cross is known as an <b>ordinary</b> meaning it is a simple geometric shape 
+			  which occupies the most prominent position in the coat of arm. Other ordinaries might include a <b>bend</b> which is a strip running 
+			  diagonally across the shield and a <b>pile</b> which is an upside down triangle whose base is on the upper edge of the shield.</p>
+			  
+			  <p>Other lesser symbols known as <b>charges</b> can also appear in a coat of arms. An example of a coat of arms that includes such elements might
+			  be a blue <b>pile</b> with a red <b>rose</b> in its centre all of which is on a shield with a green background. 
+			  The blazon for this coat of arms would be "<i>Vert, a pile Azure charged with a rose Gules</i>".</p>
+			  
+			  <br/>
+			  <br/>
+			  
+			  <p>In order to generate a coat of arms, type a blazon into the first input box, click the submit button and the corresponding coat of arms will be generated.</p>
+			  
+			  <p>This page can also be used to <b>save</b> generated coats of arms under a given surname and then <b>retrieve</b> these same images later on by entering the same surname.</p>
+			  
+			  <p>Templates are also provided at the bottom of the page. Simply click one of the links and the corresponding coat of arms will be generated.</p>
+			  
+			  <br/>
+			  <br/>
+			  
+			  <div id="image_frame"></div>
+	           	
+           	  <div id="blazon-text"></div>
+	            
+	          <br/>
+	          <br/>
+			  
+			  <form action="HelloServlet" method="post" enctype="multipart/form-data">
+			    <div class="form-group">
+			      <h2>Create:</h2>
+			      <input type="text" class="form-control" placeholder="Enter a blazon" id="user-input" name="blazon">
+			    </div>
+			    <button type="submit" class="btn btn-primary">Submit</button>
+	    	  </form>
+	    	  
+			    <br/><br/><div id="errorMsg"></div><br/><br/>
+			    
+			    <form action="HelloServlet" method="post" enctype="multipart/form-data">
+				    <div class="form-group">
+				      <h2>Download:</h2>
+				      <input type="text" class="form-control" placeholder="Enter a surname" name="surname-download">
+				    </div>
+				    <button type="submit" class="btn btn-primary">Submit</button>
+			    </form>
+			    
+			    <br/>
+	          	<br/>
+			    
+			    <form action="HelloServlet" method="post" enctype="multipart/form-data">
+				    <div class="form-group">
+				      <h2>Retrieve:</h2>
+				      <input type="text" class="form-control" placeholder="Enter a surname" name="surname-upload">
+				    </div>
+			    	<button type="submit" class="btn btn-primary">Submit</button>
+			  	</form>
+			
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				
+				<h2>Templates</h2>
+				<p>Click on the following buttons to see examples of coats of arms generated from blazons:</p>
+				
+				<form class="form-inline" action="HelloServlet" method="post" enctype="multipart/form-data">
+					<input type ="hidden" name ="blazon" value ="Azure, a bend Argent" />
+					<button type="submit" class="btn btn-primary">Azure, a bend Argent</button>
+				</form>
+				
+				<br/>
+				
+				<form class="form-inline" action="HelloServlet" method="post" enctype="multipart/form-data">
+					<input type ="hidden" name ="blazon" value ="Argent, a chevron Purpure charged with a rose Gules" />
+					<button type="submit" class="btn btn-primary">Argent, a chevron Purpure charged with a rose Gules</button>
+				</form>
+				
+				<br/>
+				
+				<form class="form-inline" action="HelloServlet" method="post" enctype="multipart/form-data">
+					<input type ="hidden" name ="blazon" value ="Vert, a lion rampant Or to the sinister" />
+					<button type="submit" class="btn btn-primary">Vert, a lion rampant Or to the sinister</button>
+				</form>
+				
+				<br/>
+				
+				<form class="form-inline" action="HelloServlet" method="post" enctype="multipart/form-data">
+					<input type ="hidden" name ="blazon" value ="Or, a saltire Sable between two spears Azure" />
+					<button type="submit" class="btn btn-primary">Or, a saltire Sable between two spears Azure</button>
+				</form>
+				
+				<br/>
+			
+			</div>
+			
+        </div>
+    </body>
+</html>

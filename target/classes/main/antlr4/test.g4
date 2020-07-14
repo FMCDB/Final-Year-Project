@@ -4,45 +4,49 @@ grammar test;
 
 blazon : tincture | seme | complexField;
 
-tincture : (tinctureNames ('and' tinctureNames)?) ','? | 'of the field';
+tincture : WS* (tinctureNames WS* ('and' WS* tinctureNames)?) ','? WS* | WS* 'of the field' WS*;
 
-tinctureNames : 'Argent' | 'Or' | 'Gules' | 'Sable' | 'Azure' | 'Vert' | 'Purpure' | 'Murrey' | 'Sanguine' | 'Tenne';
+tinctureNames : WS* ('Argent' | 'Or' | 'Gules' | 'Sable' | 'Azure' | 'Vert' | 'Purpure' | 'Murrey' | 'Sanguine' | 'Tenne') WS*;
 
-complexField : coatDivision? tincture seme? fieldPosition? 'and'? ordinary* fieldPosition? cadency? ;
+complexField :  WS* coatDivision?  WS* tincture  WS* seme? WS* 'and'? WS* ordinary* (charges | animal)* WS* escutcheonLocations? WS* quartering? WS* cadency? WS* bordure? ;
 
-fieldPosition : 'over all' ordinary | ( 'on a ' ordinaryNames tincture? charges?) ;
+escutcheonLocations : WS* ('dexter' | 'sinister') WS* ;
 
-ordinaryPosition : ('and' number)? 'in' ('chief' | 'base' | 'bend' | 'chevron' | 'pale' | 'fess') ;
+direction : WS* ('palewise' | 'fesswise') WS* ;
 
-escutcheonLocations : 'dexter' | 'sinister' ;
+coatDivision : (WS* ('party' | 'parted')? WS* 'per' WS* ordinaryNames WS*) | WS* 'quarterly' WS*;
 
-direction : 'palewise' | 'fesswise' ;
+seme : WS* (WS* ('seme of' WS* subordinary ('s' | 'es') WS* (',')? WS*) | 'semy-de-lis' | 'crusily' | 'bezante' | 'plate' | 'billete' | 'annulletty' | 'etincelle' | 'gouttee' | 'tortelly' | 'nebuly') WS* tincture? WS* ;
 
-coatDivision : ('party' | 'parted')? 'per' ordinaryNames ;
+ordinary : WS* 'and'? WS* (animal | WS* ((number | 'on a') WS* (ordinaryNames | subordinary | diminutiveNames | seme) ('s' | 'es')? WS* tincture?) WS*) WS* direction? WS* ;
 
-seme : (('seme of' subordinary ('s' | 'es') ) | 'semy-de-lis' | 'crusily' | 'bezante' | 'plate' | 'billete' | 'annulletty' | 'etincelle' | 'gouttee' | 'tortelly') tincture? ;
+ordinaryPosition : WS* ('and' WS* number)? WS* 'in' WS* ('chief' | 'base' | 'bend' | 'chevron' | 'pale' | 'fess') WS* ;
 
-ordinary : ordinaryPosition? (number (ordinaryNames | subordinary) ('s' | 'es')? tincture? | animal | diminutiveNames) direction? ordinaryPosition? 'debruised by'? (charges | animal)? escutcheonLocations? ;
+diminutiveNames : WS* (PALLET | ENDORSE | BAR | BARRULET | HAMADE | RIBBON | BATON | BendletSinister) ('s' | 'es')? WS* ;
 
-diminutiveNames : (PALLET | ENDORSE | BAR | BARRULET | HAMADE | RIBBON | BATON | BendletSinister) ('s' | 'es')? ;
+charges : 'and'? WS* ('charged with' | 'debruised by' | 'between' | 'over all' | ordinaryPosition)* WS* number WS* (subordinary | ordinaryNames) WS* ('s' | 'es')? WS* direction? WS* ordinaryPosition? WS* tincture? ;    
 
-charges : 'between'? number subordinary ('s' | 'es')? direction? ordinaryPosition* tincture ;    
+subordinary : WS* (LOZENGE | BILLET | ANNULET | ROUNDEL | LABEL | FRET | BATON | TORTEAUX | ROSE | SPEAR | SHELL | QUARTER | CANTON | FLAUNCH | GORE | GYRON | ORLE | ESCUTCHEON | FUSIL | MASCLE | RUSTRE) WS* ;
 
-subordinary : (LOZENGE | BILLET | ANNULET | ROUNDEL | LABEL | FRET | BATON | HorsesHead | TORTEAUX | ROSE | SPEAR | SHELL | QUARTER | CANTON | FLAUNCH | GORE | GYRON | ORLE | ESCUTCHEON | FUSIL | MASCLE | RUSTRE | ANNULET) ;
+ordinaryNames : WS* (FESS | PALE | BEND | BendSinister | SALTIRE | CROSS | CHEVRON | PALL | CRESCENT | BORDURE | PILE) WS* ;
 
-ordinaryNames : FESS | PALE | BEND | BendSinister | SALTIRE | CROSS | QUARTERLY | CHEVRON | PALL | CRESCENT | TORTEAUX | BORDURE | PILE ;
+number : WS* ('a' | 'an' | 'as many' | 'one' | 'two' | 'three' | 'four' | 'five') WS* ;
 
-number : 'a' | 'an' | 'as many' | 'one' | 'two' | 'three' | 'four' | 'five' ;
+quartering:  WS* (('and')? WS* 'in' WS* quarterName WS* charges)+ ;
 
-animal : number animalNames animalPosition+ ordinaryPosition? tincture ;
+quarterName: WS* 'the' WS* ('first' | 'second' | 'third' | 'fourth') WS* 'quarter' ;
 
-animalNames : LION | TYGER | BengalTiger | LEOPARD | FOX | WOLF | BEAR | BADGER | OTTER | THYLACINE | PANTHER | CAT | HOUND | WEASEL | ANTELOPE | COW | CAMEL | DEER | ELEPHANT | HIPPOPOTAMUS | RHINOCEROS | SWINE | SHEEP ;
+animal : WS* 'and'? WS* number WS* animalNames ('s' | 'es')? WS* animalPosition+ WS* ordinaryPosition? WS* tincture ;
 
-animalPosition : 'rampant' | 'segreant' | 'passant' | 'statant' | 'tripant' | 'guardant';
+animalNames : WS* (LION | TYGER | BengalTiger | LEOPARD | FOX | WOLF | BEAR | BADGER | OTTER | THYLACINE | PANTHER | CAT | HOUND | WEASEL | ANTELOPE | COW | CAMEL | DEER | ELEPHANT | HIPPOPOTAMUS | RHINOCEROS | SWINE | SHEEP) WS* ;
 
-cadency : 'with'? 'a' cadencyNames tincture? ('for' ('difference' | 'distinction'))? ;
+animalPosition : WS* ('rampant' | 'passant' | 'statant' | 'guardant') WS* ('to the sinister')? WS* ;
 
-cadencyNames : (LOZENGE | ('label of' number 'points')  | CRESCENT | MULLET | MARTLET | ANNULET | FleurDeLys | ROSE | CrossMoline | DoubleQuatrefoil) ('s' | 'es')? ;
+cadency : 'with' WS* 'a' WS* cadencyNames WS* tincture? WS* ('for' WS* ('difference' | 'distinction'))? ;
+
+cadencyNames : WS* ((LOZENGE | (WS* 'label of' WS* number WS* 'points' WS*) | MULLET | MARTLET | ANNULET | FleurDeLys | ROSE | CrossMoline | DoubleQuatrefoil) ('s' | 'es')?) WS* ;
+
+bordure: WS* 'all'? WS* 'within a bordure' WS* tinctureNames WS* ;
 
 //lexer rules
 
@@ -59,7 +63,6 @@ BILLET : 'billet' ;
 ROUNDEL : 'roundel' ;
 LABEL : 'label' ;
 FRET : 'fret' ;
-HorsesHead : 'horses\' head' ;
 TORTEAUX : 'torteaux' ;
 ROSE : 'rose' ;
 SPEAR : 'spear' ;
@@ -81,7 +84,6 @@ BEND : 'bend' ;
 BendSinister : 'bend sinister' | 'bends sinister' ;
 SALTIRE : 'saltire' ;
 CROSS : 'cross' ;
-QUARTERLY : 'quarterly' | 'quarterlies' ;  
 CHEVRON : 'chevron' ;
 PALL : 'pall' ;
 CRESCENT : 'crescent' ;
@@ -119,7 +121,4 @@ FleurDeLys : 'fleur-de-lys' | 'fleurs-de-lys' ;
 CrossMoline : ('cross' | 'crosses') ' moline' ;
 DoubleQuatrefoil : 'double quatrefoil' ;
 
-
-
-
-WS  : [ \t\r\n]+ -> skip ;
+WS : (' ' | '\t' | '\r' | '\n')+ ;

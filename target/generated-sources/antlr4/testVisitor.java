@@ -34,18 +34,6 @@ public interface testVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComplexField(testParser.ComplexFieldContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link testParser#fieldPosition}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFieldPosition(testParser.FieldPositionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link testParser#ordinaryPosition}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOrdinaryPosition(testParser.OrdinaryPositionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link testParser#escutcheonLocations}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -75,6 +63,12 @@ public interface testVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOrdinary(testParser.OrdinaryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link testParser#ordinaryPosition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrdinaryPosition(testParser.OrdinaryPositionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link testParser#diminutiveNames}.
 	 * @param ctx the parse tree
@@ -106,6 +100,18 @@ public interface testVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNumber(testParser.NumberContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link testParser#quartering}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuartering(testParser.QuarteringContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link testParser#quarterName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuarterName(testParser.QuarterNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link testParser#animal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -135,4 +141,10 @@ public interface testVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCadencyNames(testParser.CadencyNamesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link testParser#bordure}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBordure(testParser.BordureContext ctx);
 }

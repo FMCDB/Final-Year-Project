@@ -44,20 +44,6 @@ public class testBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements t
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFieldPosition(testParser.FieldPositionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitOrdinaryPosition(testParser.OrdinaryPositionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitEscutcheonLocations(testParser.EscutcheonLocationsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -87,6 +73,13 @@ public class testBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements t
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitOrdinary(testParser.OrdinaryContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitOrdinaryPosition(testParser.OrdinaryPositionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -128,6 +121,20 @@ public class testBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements t
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitQuartering(testParser.QuarteringContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitQuarterName(testParser.QuarterNameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitAnimal(testParser.AnimalContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -157,4 +164,11 @@ public class testBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements t
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitCadencyNames(testParser.CadencyNamesContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitBordure(testParser.BordureContext ctx) { return visitChildren(ctx); }
 }
